@@ -67,8 +67,13 @@ img {
 .topnav .icon {
   display: none;
 }
-
-@media screen and (max-width: 768px) {
+@media  screen and (max-width:1130px) {
+  .topnav a{
+    font-size:13px;
+    font-weight: bold;
+  }
+}
+@media screen and (max-width: 950px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -76,7 +81,7 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 950px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -139,7 +144,7 @@ main {
 
 /* Modal form */
 
-.button {
+.button, .btn-close {
   background: #fe142f;
   margin-top: 0.5em;
   padding: 1em;
@@ -169,7 +174,7 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
-.content {
+.content ,.validation{
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
@@ -180,8 +185,13 @@ main {
   overflow: hidden;
   position: relative;
   color: #fff;
-  padding-top: 10px;
+  padding-top: 20px;
 }
+.validation{
+  padding-top: 20px;
+  height: 500px;
+}
+
 
 .modal-body {
   padding: 15px 8%;
@@ -322,7 +332,7 @@ input[data-error]::after {
   transform: rotate(-45deg);
 }
 .btn-submit,
-.btn-signup {
+.btn-signup , .btn-close{
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -333,6 +343,7 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -478,6 +489,11 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+@media screen and (max-width: 1000px) {
+  .hero-headline{
+    font-size: 4.5rem;
+  }
+}
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
@@ -486,7 +502,7 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 0px;
   }
   .hero-content::after {
     content: unset;
@@ -495,12 +511,12 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 2.5rem;
     white-space: normal;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .hero-img img {
     border-radius: 10px;
@@ -530,4 +546,13 @@ footer {
 .erreur{
   color:red;
   font-size: 0.6em;
+}
+
+.validation p{
+  font-size: 1.1em;
+  font-weight: lighter;
+  text-align: center;
+  margin:30px;
+  margin-top:160px;
+  margin-bottom: 190px;
 }
