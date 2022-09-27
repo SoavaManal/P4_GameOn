@@ -206,3 +206,4 @@ submitForm.addEventListener("submit", (e) => {
     window.alert("Veillez remplir les champs qui manque");
   }
 });
+//test
