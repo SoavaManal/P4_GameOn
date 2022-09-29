@@ -111,7 +111,7 @@ const valideBirth = (test) => {
 };
 // fixer le minimun d'age "10ans"
 const dateMin = new Date("2012-01-01");
-// fixer une date max "99ans"
+// fixer le maximum d'age "99ans"
 const dateMax = new Date("1923-01-01");
 
 const birthInput = document.querySelector("#birthdate");
