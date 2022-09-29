@@ -12,8 +12,10 @@
 const menuBars = document.querySelector(".icon");
 menuBars.addEventListener("click", (event) => {
   event.preventDefault();
-  var x = document.getElementById("myTopnav");
+  const x = document.getElementById("myTopnav");
+  const y = document.querySelector("main");
   x.classList.toggle("responsive");
+  y.classList.toggle("responsive-main");
 });
 
 // DOM Elements
