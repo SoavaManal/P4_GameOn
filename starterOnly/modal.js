@@ -47,6 +47,7 @@ btnClose.forEach((btn) =>
 // Valider les champs du formulaire
 
 //---Nom et prenom---
+
 // fonction pour tester la validité du nom et prénom
 const validName = (test) => {
   // créer un regEx :le nom doit contenir minimum 2 lettres
@@ -81,6 +82,7 @@ nomInput.addEventListener("change", () => {
 });
 
 //---Email---
+
 // fonction por tester la validité de l'email
 const validEmail = (test) => {
   // creer un regEx pour la validation des emails
@@ -89,7 +91,7 @@ const validEmail = (test) => {
   return email.test(test);
 };
 
-// verrifier la valeur entrer
+// verifier la valeur entrer
 const emailInput = document.querySelector("#email");
 emailInput.addEventListener("change", () => {
   if (!validEmail(emailInput.value)) {
@@ -101,25 +103,37 @@ emailInput.addEventListener("change", () => {
 });
 
 //---la date de naissance---
+
 const valideBirth = (test) => {
   //regex accepte les date de type aaaa-mm-jj ou aaaa/mm/jj
-  const birthday =
-    /19[0-9]{2}|200[01234]{1}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/;
+  const birthday = /\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/;
   return birthday.test(test);
 };
+// fixer le minimun d'age "10ans"
+const dateMin = new Date("2012-01-01");
+// fixer une date max "99ans"
+const dateMax = new Date("1923-01-01");
 
 const birthInput = document.querySelector("#birthdate");
 birthInput.addEventListener("change", () => {
-  console.log(birthInput.value);
-  if (!birthInput.value || !valideBirth(birthInput.value)) {
+  let date = new Date(birthInput.value);
+  // Comparer la date entrer avec la date minimum
+  // Comparer la date entrer avec la date maximum
+  // verifier la validation du RegEx
+  if (
+    date.getTime() > dateMin.getTime() ||
+    date.getTime() < dateMax.getTime() ||
+    !valideBirth(birthInput.value)
+  ) {
     document.querySelector(".birth-valide").innerText =
-      "Vous devez entrer une date de naissance valide '18ans ou plus'.";
+      "Vous devez entrer une date de naissance valide 'le joeur doit avoir entre 10ans à 99ans'.";
   } else {
     document.querySelector(".birth-valide").innerText = "";
   }
 });
 
 //---nombres de tournois---
+
 // recuperer element de la DOM
 const quantityInput = document.querySelector("#quantity");
 // ecouter le mouvement en "change"
@@ -134,6 +148,7 @@ quantityInput.addEventListener("change", () => {
 });
 
 //---City---
+
 //recuperer les inputs radio
 const cityChecked = document.querySelectorAll("[name=location]");
 let cityValid = "";
@@ -144,7 +159,8 @@ cityChecked.forEach((city) =>
     }
   })
 );
-// Condition generale
+//---Condition generale---
+
 // recuperer element
 const condition = document.querySelector("#checkbox1");
 condition.addEventListener("change", () => {
@@ -158,7 +174,8 @@ condition.addEventListener("change", () => {
   }
 });
 
-// Si utilisateur souhaite etre prevenu au prochain evenement
+//---Si utilisateur souhaite etre prevenu au prochain evenement---
+
 // creer un varriable boolean qui prend la valeur false par defaut
 let prevenu = false;
 const utilisateurPrevenu = document.querySelector("#checkbox2");
