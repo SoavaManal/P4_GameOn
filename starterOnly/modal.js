@@ -1,12 +1,20 @@
 // Menu bars au responsive
-function editNav() {
+// function editNav() {
+//   var x = document.getElementById("myTopnav");
+// if (x.className === "topnav") {
+//   x.className += " responsive";
+// } else {
+//   x.className = "topnav";
+// }
+// }
+
+// Menu bars au responsive avec une nouvelle methode
+const menuBars = document.querySelector(".icon");
+menuBars.addEventListener("click", (event) => {
+  event.preventDefault();
   var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
+  x.classList.toggle("responsive");
+});
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
@@ -206,4 +214,3 @@ submitForm.addEventListener("submit", (e) => {
     window.alert("Veillez remplir les champs qui manque");
   }
 });
-//test
