@@ -95,7 +95,7 @@ img {
     text-align: left;
   }
   .responsive-main{
-    margin-top: -160px;
+    margin-top: -160px; 
     z-index: -1;
     filter:blur(2px)
   }

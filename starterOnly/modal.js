@@ -12,9 +12,13 @@
 const menuBars = document.querySelector(".icon");
 menuBars.addEventListener("click", (event) => {
   event.preventDefault();
+  // recuperer les element du DOM la barre de navigation et le main
   const x = document.getElementById("myTopnav");
   const y = document.querySelector("main");
+  // ajouter ou supprimer une class
+  // pour faire aparaitre la nav
   x.classList.toggle("responsive");
+  // pour fixer le main en flou derriere la barre
   y.classList.toggle("responsive-main");
 });
 
