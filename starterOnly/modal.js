@@ -57,7 +57,7 @@ btnClose.forEach((btn) =>
 // fonction pour tester la validité du nom et prénom
 const validName = (test) => {
   // créer un regEx :le nom doit contenir minimum 2 lettres
-  let name = new RegExp("^[A-Za-zéèê]{2,}$");
+  let name = new RegExp("^([A-Za-zéèê]{2,})([ ])?([A-Za-zéèê]{2,})?$");
   return name.test(test);
 };
 
@@ -70,7 +70,7 @@ prenomInput.addEventListener("change", () => {
   if (!validName(prenomInput.value)) {
     // affichage d'un message d'erreur
     document.querySelector(".prenom-valide").innerText =
-      "Veuillez entrer 2 caractères ou plus.";
+      "Veuillez entrer un prenom valide.";
   } else {
     document.querySelector(".prenom-valide").innerText = "";
   }
@@ -81,7 +81,7 @@ const nomInput = document.querySelector("#last");
 nomInput.addEventListener("change", () => {
   if (!validName(nomInput.value)) {
     document.querySelector(".nom-valide").innerText =
-      "Veuillez entrer 2 caractères ou plus.";
+      "Veuillez entrer une nom valid.";
   } else {
     document.querySelector(".nom-valide").innerText = "";
   }
