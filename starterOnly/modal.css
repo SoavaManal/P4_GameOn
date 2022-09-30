@@ -38,8 +38,11 @@ img {
     float: left;
 }
 .main-navbar {
-    float: right;
-    background-color: white;
+    /* float: right; */
+    background-color:white;
+    border-radius: 10px;
+    position: fixed;
+    right: 0;
 }
 .topnav a {
   float: left;
@@ -95,7 +98,7 @@ img {
     text-align: left;
   }
   .responsive-main{
-    margin-top: -160px; 
+    /* margin-top: -160px;  */
     z-index: -1;
     filter:blur(2px)
   }
