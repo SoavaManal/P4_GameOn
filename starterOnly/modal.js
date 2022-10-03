@@ -8,6 +8,8 @@
 // }
 // }
 
+//**Button**
+
 // Menu bars au responsive avec une nouvelle methode
 const menuBars = document.querySelector(".icon");
 menuBars.addEventListener("click", (event) => {
@@ -50,6 +52,7 @@ btnClose.forEach((btn) =>
   })
 );
 
+//**Les champs Formulaire**
 // Valider les champs du formulaire
 
 //---Nom et prenom---
@@ -64,7 +67,7 @@ const validName = (test) => {
 // Récuperer input prenom du DOM
 const prenomInput = document.querySelector("#first");
 // écouter le mouvement en "change"
-prenomInput.addEventListener("change", () => {
+prenomInput.addEventListener("input", () => {
   // verifier la valeur entrer à l'aide de fonction validName
   // si la fonction return false
   if (!validName(prenomInput.value)) {
@@ -78,7 +81,7 @@ prenomInput.addEventListener("change", () => {
 
 // Refaire la meme chose pour verifier le nom
 const nomInput = document.querySelector("#last");
-nomInput.addEventListener("change", () => {
+nomInput.addEventListener("input", () => {
   if (!validName(nomInput.value)) {
     document.querySelector(".nom-valide").innerText =
       "Veuillez entrer une nom valid.";
@@ -99,7 +102,7 @@ const validEmail = (test) => {
 
 // verifier la valeur entrer
 const emailInput = document.querySelector("#email");
-emailInput.addEventListener("change", () => {
+emailInput.addEventListener("input", () => {
   if (!validEmail(emailInput.value)) {
     document.querySelector(".email-valide").innerText =
       "Veuillez entrer un email valide!";
@@ -191,6 +194,8 @@ utilisateurPrevenu.addEventListener("change", () => {
     prevenu = true;
   }
 });
+
+//**stockage de données**
 
 // Envoi du donner au localestorage + affichage du message de validation
 // Récuperer element (form)
