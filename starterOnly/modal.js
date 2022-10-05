@@ -1,26 +1,18 @@
-// Menu bars au responsive
-// function editNav() {
-//   var x = document.getElementById("myTopnav");
-// if (x.className === "topnav") {
-//   x.className += " responsive";
-// } else {
-//   x.className = "topnav";
-// }
-// }
-
 //**Button**
 
-// Menu bars au responsive avec une nouvelle methode
+// MenuBars au responsive
 const menuBars = document.querySelector(".icon");
-menuBars.addEventListener("click", (event) => {
-  event.preventDefault();
+menuBars.addEventListener("click", () => {
   // recuperer les element du DOM la barre de navigation et le main
   const x = document.getElementById("myTopnav");
   const y = document.querySelector("main");
-  // ajouter ou supprimer une class
-  // pour faire aparaitre la nav
+  //utilisation de methode native: toggle
+  // if (x.className === "topnav") {
+  //   x.className += " responsive";
+  // } else {
+  //   x.className = "topnav";
+  // }
   x.classList.toggle("responsive");
-  // pour fixer le main en flou derriere la barre
   y.classList.toggle("responsive-main");
 });
 
@@ -37,11 +29,9 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// La fonctionnalité du bouton (x) et (Fermer)
-// Recupérer les buttons du DOM
+// Bouton (x) et (Fermer)
 
 const btnClose = document.querySelectorAll(".btn-x");
-// au click en ajoute le style display="none"
 btnClose.forEach((btn) =>
   btn.addEventListener("click", () => {
     modalbg.style.display = "none";
@@ -53,101 +43,87 @@ btnClose.forEach((btn) =>
 );
 
 //**Les champs Formulaire**
-// Valider les champs du formulaire
 
-//---Nom et prenom---
-
-// fonction pour tester la validité du nom et prénom
-const validName = (test) => {
-  // créer un regEx :le nom doit contenir minimum 2 lettres
-  let name = new RegExp("^([A-Za-zéèê]{2,})([ ])?([A-Za-zéèê]{2,})?$");
-  return name.test(test);
+let inputValid = {
+  first: false,
+  last: false,
+  email: false,
+  birth: false,
+  city: false,
 };
 
-// Récuperer input prenom du DOM
+// creer des regEx
+const pattern = {
+  name: /^([A-Za-zéèê]{2,})([ ])?([A-Za-zéèê]{2,})?$/,
+  email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+  date_naissance: /\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/,
+};
+
+//---Nom et prenom---
 const prenomInput = document.querySelector("#first");
-// écouter le mouvement en "change"
 prenomInput.addEventListener("input", () => {
-  // verifier la valeur entrer à l'aide de fonction validName
-  // si la fonction return false
-  if (!validName(prenomInput.value)) {
-    // affichage d'un message d'erreur
-    document.querySelector(".prenom-valide").innerText =
-      "Veuillez entrer un prenom valide.";
-  } else {
+  // tester si la valeur entrer respect le regEx name
+  if (pattern.name.test(prenomInput.value)) {
     document.querySelector(".prenom-valide").innerText = "";
+    inputValid.first = true;
+  } else {
+    document.querySelector(".prenom-valide").innerText =
+      "Veuillez entrer un prenom valide, minimum 2 lettres.";
   }
 });
 
 // Refaire la meme chose pour verifier le nom
 const nomInput = document.querySelector("#last");
 nomInput.addEventListener("input", () => {
-  if (!validName(nomInput.value)) {
-    document.querySelector(".nom-valide").innerText =
-      "Veuillez entrer une nom valid.";
-  } else {
+  // tester si la valeur entrer respect le regEx name
+  if (pattern.name.test(nomInput.value)) {
     document.querySelector(".nom-valide").innerText = "";
+    inputValid.last = true;
+  } else {
+    document.querySelector(".nom-valide").innerText =
+      "Veuillez entrer une nom valid, minimum 2 lettres.";
   }
 });
 
 //---Email---
-
-// fonction por tester la validité de l'email
-const validEmail = (test) => {
-  // creer un regEx pour la validation des emails
-  // Le regEx utiliser et récuperer du site regexr.com
-  const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  return email.test(test);
-};
-
-// verifier la valeur entrer
 const emailInput = document.querySelector("#email");
 emailInput.addEventListener("input", () => {
-  if (!validEmail(emailInput.value)) {
-    document.querySelector(".email-valide").innerText =
-      "Veuillez entrer un email valide!";
-  } else {
+  // tester si la valeur entrer respect le regEx email
+  if (pattern.email.test(emailInput.value)) {
     document.querySelector(".email-valide").innerText = "";
+    inputValid.email = true;
+  } else {
+    document.querySelector(".email-valide").innerText =
+      "Coucou,Veuillez entrer un email valide!";
   }
 });
 
 //---la date de naissance---
-
-const valideBirth = (test) => {
-  //regex accepte les date de type aaaa-mm-jj ou aaaa/mm/jj
-  const birthday = /\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/;
-  return birthday.test(test);
-};
-// fixer le minimun d'age "10ans"
-const dateMin = new Date("2012-01-01");
-// fixer le maximum d'age "99ans"
-const dateMax = new Date("1923-01-01");
+const dateMin = new Date("2012-01-01"); // Age minimum "10ans"
+const dateMax = new Date("1923-01-01"); // Age maximum "99ans"
 
 const birthInput = document.querySelector("#birthdate");
-birthInput.addEventListener("change", () => {
+birthInput.addEventListener("input", () => {
   let date = new Date(birthInput.value);
-  // Comparer la date entrer avec la date minimum
-  // Comparer la date entrer avec la date maximum
-  // verifier la validation du RegEx
+  // tester si la valeur entrer respect le regEx date_naissance
+  // Comparer la date entrer avec age min et max
   if (
     date.getTime() > dateMin.getTime() ||
     date.getTime() < dateMax.getTime() ||
-    !valideBirth(birthInput.value)
+    !pattern.date_naissance.test(birthInput.value)
   ) {
     document.querySelector(".birth-valide").innerText =
       "Vous devez entrer une date de naissance valide 'le joeur doit avoir entre 10ans à 99ans'.";
   } else {
     document.querySelector(".birth-valide").innerText = "";
+    inputValid.birth = true;
   }
 });
 
 //---nombres de tournois---
-
-// recuperer element de la DOM
 const quantityInput = document.querySelector("#quantity");
-// ecouter le mouvement en "change"
 quantityInput.addEventListener("change", () => {
-  // si il n'a aucun valeur entrer
+  // si le champs est vide
   if (!quantityInput.value) {
     document.querySelector(".quantity-valide").innerText =
       "Veuillez entrer un chiffre";
@@ -157,25 +133,25 @@ quantityInput.addEventListener("change", () => {
 });
 
 //---City---
-
-//recuperer les inputs radio
 const cityChecked = document.querySelectorAll("[name=location]");
 let cityValid = "";
 cityChecked.forEach((city) =>
-  city.addEventListener("change", () => {
-    if (city.value) {
+  city.addEventListener("input", () => {
+    if (!city.value) {
+      document.querySelector(".city-valide").innerText =
+        "Veuillez choisir une ville";
+    } else {
       cityValid = city.value;
+      document.querySelector(".city-valide").innerText = "";
+      inputValid.city = true;
     }
   })
 );
 //---Condition generale---
-
-// recuperer element
 const condition = document.querySelector("#checkbox1");
 condition.addEventListener("change", () => {
   // si la case n'est pas coché
   if (condition.checked !== true) {
-    // afficher un message d'erreur
     document.querySelector(".condition").innerText =
       "Veuillez accépter les conditions d'utilisation";
   } else {
@@ -184,7 +160,6 @@ condition.addEventListener("change", () => {
 });
 
 //---Si utilisateur souhaite etre prevenu au prochain evenement---
-
 // creer un varriable boolean qui prend la valeur false par defaut
 let prevenu = false;
 const utilisateurPrevenu = document.querySelector("#checkbox2");
@@ -195,23 +170,19 @@ utilisateurPrevenu.addEventListener("change", () => {
   }
 });
 
-//**stockage de données**
-
 // Envoi du donner au localestorage + affichage du message de validation
-// Récuperer element (form)
 const submitForm = document.querySelector("[name=reserve]");
-// Ecouter l'evenemnt en "Submit"
 submitForm.addEventListener("submit", (e) => {
   // Empecher la gestion du submit par defaut
   e.preventDefault();
   // si tous les champs sont valid
   if (
-    validName(prenomInput.value) &&
-    validName(nomInput.value) &&
-    validEmail(emailInput.value) &&
-    valideBirth(birthInput.value) &&
+    inputValid.first &&
+    inputValid.last &&
+    inputValid.email &&
+    inputValid.birth &&
+    inputValid.city &&
     quantityInput.value &&
-    cityValid &&
     condition.checked
   ) {
     console.log("toute est bon");
